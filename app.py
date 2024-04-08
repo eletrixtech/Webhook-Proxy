@@ -1,6 +1,6 @@
 from colorama import Fore
 import requests as rq
-from flask import Flask, request
+from flask import Flask, request,redirect
 import config
 
 app = Flask(__name__)
@@ -17,8 +17,10 @@ print(Fore.GREEN, """
                                                                   |___/
 """)
 print(Fore.GREEN, "-----------------------------------------")
-
-@app.route("/api/send/<channelid>/<webhook>", methods=['POST', 'GET'])
+@app.route("/", methods=['POST', 'GET']) #heheboi
+def home():
+    return redirect("https://github.com/eletrixtech/Webhook-Proxy")
+@app.route("/api/webhooks/<channelid>/<webhook>", methods=['POST', 'GET'])
 def api_send(channelid, webhook):
     if request.method == 'POST':
         data = request.json  
